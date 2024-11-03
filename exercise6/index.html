@@ -1,0 +1,32 @@
+<script>
+/* Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.*/
+
+function isSubsequence(str1, str2) {
+    var p1 = 0;
+    var p2 = 0;
+
+    for (p1; p1 < str1.length; p1++) {
+        var found = false;
+        p2 = p1;
+        while(p2 < str2.length) {
+            if (str1[p1] != str2[p2]) {
+                p2++;
+            }
+            else {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return false;
+        }
+    }
+    return true;
+}
+
+console.log(isSubsequence('hello', 'hello world')); // true
+console.log(isSubsequence('sing', 'sting')); // true
+console.log(isSubsequence('abc', 'abracadabra')); // true
+console.log(isSubsequence('abc', 'acb')); // false (order matters)
+</script>
+

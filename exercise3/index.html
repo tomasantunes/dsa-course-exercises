@@ -1,0 +1,34 @@
+<script>
+/* Write a function called sameFrequency. Given two positive integers, find out if the two numbers have the same frequency of digits. */
+
+function sameFrequency(num1, num2){
+    var n1 = num1.toString();
+    var n2 = num2.toString();
+    if (n1.length !== n2.length) return false;
+
+    var freqs1 = {};
+    var freqs2 = {};
+
+    for (var i = 0; i < n1.length; i++) {
+        var c1 = n1[i];
+        var c2 = n2[i];
+        
+        freqs1[c1] = (freqs1[c1] > 0) ? freqs1[c1] + 1 : 1;
+        freqs2[c2] = (freqs2[c2] > 0) ? freqs2[c2] + 1 : 1;
+    }
+
+    for (let key in freqs1) {
+        if (freqs1[key] != freqs2[key]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+console.log(sameFrequency(182,281)) // true
+console.log(sameFrequency(34,14)) // false
+console.log(sameFrequency(3589578, 5879385)) // true
+console.log(sameFrequency(22,222)) // false
+
+</script>
