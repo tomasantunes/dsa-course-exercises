@@ -1,0 +1,46 @@
+<script>
+/*
+Write a function called collectStrings which accepts an object and returns an array of all the values in the object that have a typeof string
+*/
+
+function collectStrings(obj) {
+    var result = [];
+
+    Object.keys(obj).forEach(function(key) {
+        if (isString(obj[key])) {
+            result.push(obj[key]);
+        }
+        else if (isObject(obj[key])) {
+            result = result.concat(collectStrings(obj[key]));
+        }
+    });
+
+    return result;
+}
+
+function isString(val) {
+    return typeof val === "string";
+}
+
+function isObject (item) {
+  return (typeof item === "object" && !Array.isArray(item) && item !== null);
+}
+
+const obj = {
+    stuff: "foo",
+    data: {
+        val: {
+            thing: {
+                info: "bar",
+                moreInfo: {
+                    evenMoreInfo: {
+                        weMadeIt: "baz"
+                    }
+                }
+            }
+        }
+    }
+}
+
+console.log(collectStrings(obj)) // ["foo", "bar", "baz"])
+</script>
