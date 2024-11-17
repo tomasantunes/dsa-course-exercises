@@ -1,0 +1,26 @@
+<script>
+/* Implement a function that takes the first element of an array, selects it as a pivot, determines where it should go in the array, returns the index and puts the elements that are less than it on the left and the elements that are greater than it on the right. */
+
+function pivotHelper(arr, start, end) {
+    var pivot_index = 0;
+
+    for (var i = 1; i <= end; i++) {
+        if (arr[start] > arr[i]) {
+            pivot_index++;
+            swap(arr, i, pivot_index);
+        }
+    }
+    swap(arr, start, pivot_index);
+    return pivot_index;
+}
+
+function swap(arr, idx1, idx2) {
+    var temp = arr[idx1];
+    arr[idx1] = arr[idx2];
+    arr[idx2] = temp;
+}
+
+var arr = [5, 2, 1, 8, 4, 7, 6, 3]
+console.log(pivotHelper(arr, 0, arr.length - 1));
+console.log(arr);
+</script>
