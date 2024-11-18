@@ -1,0 +1,40 @@
+<script>
+/* Implement Radix Sort */
+
+function radixSort(arr) {
+    var max = mostDigits(arr);
+
+    for (var k = 0; k < max; k++) {
+        var buckets = [[], [], [], [], [], [], [], [], [], []];
+        for (var i = 0; i < arr.length; i++) {
+            var digit = getDigit(arr[i], k);
+            buckets[digit].push(arr[i]);
+        }
+        arr = [];
+        for (var i in buckets) {
+            arr = arr.concat(buckets[i]);
+        }
+    }
+    return arr;
+}
+
+function getDigit(num, i) {
+    return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
+}
+
+function digitCount(num) {
+    if (num === 0) return 1;
+    return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+function mostDigits(nums) {
+    let maxDigits = 0;
+    for (let i = 0; i < nums.length; i++) {
+        maxDigits = Math.max(maxDigits, digitCount(nums[i]));
+    }
+    return maxDigits;
+}
+
+console.log(radixSort([10, 5, 1, 400, 322, 378, 200, 58, 46]))
+
+</script>
