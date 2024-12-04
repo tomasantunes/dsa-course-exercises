@@ -1,5 +1,5 @@
 <script>
-/* Implement the Pop method of the Singly Linked List */
+/* Implement the shift method of the Singly Linked List. */
 
 class Node {
     constructor(val) {
@@ -48,12 +48,22 @@ class SinglyLinkedList {
         }
         return temp;
     }
+
+    shift() {
+        if (this.head == null) {
+            return undefined;
+        }
+        var temp = this.head;
+        this.head = this.head.next;
+        this.length--;
+        return temp;
+    }
 }
 
 var list = new SinglyLinkedList();
 list.push(1);
 list.push(2);
 list.push(3);
-console.log(list.pop());
+console.log(list.shift());
 console.log(list);
 </script>
