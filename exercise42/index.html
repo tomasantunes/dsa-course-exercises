@@ -121,9 +121,9 @@ class SinglyLinkedList {
         if (idx == this.length - 1) return this.pop();
         if (idx == 0) return this.shift();
 
-        var n = this.get(idx - 1);
-        var removedNode = n.next;
-        n.next = n.next.next;
+        var prev = this.get(idx - 1);
+        var removedNode = prev.next;
+        prev.next = removedNode.next;
         this.length--;
         return removedNode;
     }
