@@ -1,5 +1,5 @@
 <script>
-/* Implement the push method of the Doubly Linked List */
+/* Implement the pop method of the Doubly Linked List */
 
 class Node {
     constructor(val) {
@@ -31,6 +31,22 @@ class DoublyLinkedList {
         this.length++;
         return this;
     }
+
+    pop() {
+        if (this.head == null) return undefined;
+
+        var t = this.tail;
+
+        if (this.length == 1) {
+            this.head = null;
+            this.tail = null;
+        }
+
+        this.tail = this.tail.prev;
+        this.tail.next = null;
+        this.length--;
+        return t;
+    }
 }
 
 var list = new DoublyLinkedList();
@@ -39,5 +55,6 @@ list.push(20);
 list.push(30);
 list.push(40);
 list.push(50);
+console.log(list.pop());
 console.log(list);
 </script>
