@@ -107,6 +107,16 @@ class DoublyLinkedList {
         }
     }
 
+    set(idx, val) {
+        var n = this.get(idx);
+
+        if (n != null) {
+            n.val = val;
+            return true;
+        }
+        return false;
+    }
+
     insert(idx, val) {
         if (idx < 0 || idx > this.length) return false;
         if (idx == 0) {
