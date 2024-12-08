@@ -108,19 +108,19 @@ class DoublyLinkedList {
     }
 
     insert(idx, val) {
-        if (idx < 0 || idx >= this.length) return false;
+        if (idx < 0 || idx > this.length) return false;
         if (idx == 0) {
             this.unshift(val);
             return true;
         }
-        if (idx == this.length - 1) {
+        if (idx == this.length) {
             this.push(val);
             return true;
         }
 
         var n = new Node(val);
         var prev = this.get(idx - 1);
-        var after = this.get(idx);
+        var after = prev.next;
         prev.next = n;
         n.prev = prev;
         n.next = after;
