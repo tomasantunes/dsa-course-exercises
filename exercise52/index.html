@@ -1,0 +1,159 @@
+<script>
+/* Implement the remove method of the Doubly Linked List */
+
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(val) {
+        var n = new Node(val);
+
+        if (this.head == null) {
+            this.head = n;
+            this.tail = n;
+        }
+        else {
+            this.tail.next = n;
+            n.prev = this.tail;
+            this.tail = n;
+        }
+        this.length++;
+        return this;
+    }
+
+    pop() {
+        if (this.head == null) return undefined;
+
+        var t = this.tail;
+
+        if (this.length == 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else {
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+            t.prev = null;
+        }
+        this.length--;
+        return t;
+    }
+
+    shift() {
+        if (this.head == null) return undefined;
+
+        var oldHead = this.head;
+
+        if (this.length == 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else {
+            this.head = oldHead.next;
+            this.head.prev = null;
+            oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+
+    unshift(val) {
+        var n = new Node(val);
+
+        if (this.length == 0) {
+            this.head = n;
+            this.tail = n;
+        }
+        else {
+            this.head.prev = n;
+            n.next = this.head;
+            this.head = n;
+        }
+        this.length++;
+        return this;
+    }
+
+    get(idx) {
+        if (idx < 0 || idx >= this.length) return null;
+
+        if (idx <= this.length / 2) {
+            var i = 0;
+            var current = this.head;
+            while (i != idx) {
+                current = current.next;
+                i++;
+            }
+            return current;
+        }
+        else {
+            var i = this.length - 1;
+            var current = this.tail;
+            while (i != idx) {
+                current = current.prev;
+                i--;
+            }
+            return current;
+        }
+    }
+
+    insert(idx, val) {
+        if (idx < 0 || idx > this.length) return false;
+        if (idx == 0) {
+            this.unshift(val);
+            return true;
+        }
+        if (idx == this.length) {
+            this.push(val);
+            return true;
+        }
+
+        var n = new Node(val);
+        var prev = this.get(idx - 1);
+        var after = prev.next;
+        prev.next = n;
+        n.prev = prev;
+        n.next = after;
+        after.prev = n;
+        this.length++;
+        return true;
+
+    }
+
+    remove(idx) {
+        if (idx == 0 || idx >= this.length) return undefined;
+        if (idx == 0) return this.shift();
+        if (idx == this.length - 1) return this.pop();
+
+        var removed = this.get(idx);
+        var before = removed.prev;
+        var after = removed.next;
+
+        before.next = after;
+        after.prev = before;
+        removed.prev = null;
+        removed.next = null;
+        this.length--;
+        return removed;
+    }
+}
+
+var list = new DoublyLinkedList();
+list.push(10);
+list.push(20);
+list.push(30);
+list.push(40);
+list.push(50);
+console.log(list.remove(2));
+console.log(list);
+</script>
