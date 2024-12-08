@@ -1,5 +1,5 @@
 <script>
-/* Implement the shift method of the Doubly Linked List */
+/* Implement the unshift method of the Doubly Linked List */
 
 class Node {
     constructor(val) {
@@ -67,6 +67,22 @@ class DoublyLinkedList {
         this.length--;
         return oldHead;
     }
+
+    unshift(val) {
+        var n = new Node(val);
+
+        if (this.length == 0) {
+            this.head = n;
+            this.tail = n;
+        }
+        else {
+            this.head.prev = n;
+            n.next = this.head;
+            this.head = n;
+        }
+        this.length++;
+        return this;
+    }
 }
 
 var list = new DoublyLinkedList();
@@ -75,6 +91,6 @@ list.push(20);
 list.push(30);
 list.push(40);
 list.push(50);
-console.log(list.shift());
+console.log(list.unshift(5));
 console.log(list);
 </script>
