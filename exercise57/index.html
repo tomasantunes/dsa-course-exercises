@@ -25,25 +25,20 @@ class BinarySearchTree {
         var currentNode = this.root;
 
         while(true) {
-            console.log(currentNode);
+            if (n.value == currentNode.value) return undefined;
             if (n.value > currentNode.value) {
                 if (currentNode.right == null) {
                     currentNode.right = n;
                     return this;
                 }
-                else {
-                    currentNode = currentNode.right;
-                }
-                
+                currentNode = currentNode.right;
             }
-            else if (n.value < currentNode.value) {
+            else {
                 if (currentNode.left == null) {
                     currentNode.left = n;
                     return this;
                 }
-                else {
-                    currentNode = currentNode.left;
-                }
+                currentNode = currentNode.left;
             }
         }
     }
