@@ -1,0 +1,69 @@
+<script>
+/* Implement the extractMax method of a Binary Heap */
+
+class BinaryHeap {
+    constructor() {
+        this.values = [];
+    }
+
+    insert(val) {
+        this.values.push(val);
+        var index = this.values.length - 1;
+        var parentIndex = Math.floor((index-1) / 2);
+
+        while(this.values[parentIndex] < this.values[index] && index > 0) {
+            var temp = this.values[parentIndex];
+            this.values[parentIndex] = this.values[index];
+            this.values[index] = temp;
+            index = parentIndex;
+            parentIndex = Math.floor((index-1) / 2);
+        }
+    }
+
+    extractMax() {
+        var oldRoot = this.values[0];
+        this.values[0] = this.values[this.values.length - 1];
+        
+        var parentIndex = 0;
+        while(true) {
+            var leftChild = parentIndex * 2 + 1;
+            if (leftChild > this.values.length - 1) break;
+            var rightChild = parentIndex * 2 + 2;
+            var largestIndex;
+            if (rightChild > this.values.length - 1) {
+                largestIndex = leftChild;
+            }
+            else {
+                largestIndex = this.values[leftChild] > this.values[rightChild] ? leftChild : rightChild;
+            }
+
+            if (this.values[parentIndex] < this.values[largestIndex]) {
+                var temp = this.values[parentIndex];
+                this.values[parentIndex] = this.values[largestIndex];
+                this.values[largestIndex] = temp;
+                parentIndex = largestIndex;
+                console.log(this.values);
+            }
+            else {
+                break;
+            }
+        }
+        return oldRoot;
+
+    }
+}
+
+var heap = new BinaryHeap();
+heap.insert(30);
+heap.insert(20);
+heap.insert(40);
+heap.insert(45);
+heap.insert(50);
+heap.insert(5);
+heap.insert(25);
+
+
+console.log(heap.values);
+console.log(heap.extractMax());
+console.log(heap.values);
+</script>
