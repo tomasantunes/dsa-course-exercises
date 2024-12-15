@@ -22,7 +22,9 @@ class BinaryHeap {
 
     extractMax() {
         var oldRoot = this.values[0];
-        this.values[0] = this.values[this.values.length - 1];
+        var end = this.values.pop();
+        if (this.values.length < 1) return oldRoot;
+        this.values[0] = end;
         
         var parentIndex = 0;
         while(true) {
