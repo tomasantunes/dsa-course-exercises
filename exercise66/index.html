@@ -35,7 +35,7 @@ class HashTable {
         else {
             for (var i in this.keyMap[hash]) {
                 if (this.keyMap[hash][i][0] == key) {
-                    return this.keyMap[hash][i];
+                    return this.keyMap[hash][i][1];
                 } 
             }
         }
