@@ -1,0 +1,55 @@
+<script>
+/* Implement the set and get methods of a hash table */
+
+class HashTable {
+    constructor(size=53) {
+        this.keyMap = new Array(size);
+    }
+
+    _hash(key) {
+        let total = 0;
+        let WEIRD_PRIME = 31;
+        for (let i = 0; i < Math.min(key.length, 100); i++) {
+            let char = key[i];
+            let value = char.charCodeAt(0) - 96;
+            total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+        }
+        return total;
+    }
+
+    set(key, value) {
+        var hash = this._hash(key);
+        if (this.keyMap[hash] == undefined) {
+            this.keyMap[hash] = [];
+        }
+        this.keyMap[hash].push([key, value]);
+    }
+
+    get(key) {
+        var hash = this._hash(key);
+        if (this.keyMap[hash] == undefined) return undefined;
+
+        if (this.keyMap[hash].length == 1) {
+            return this.keyMap[hash][0];
+        }
+        else {
+            for (var i in this.keyMap[hash]) {
+                if (this.keyMap[hash][i][0] == key) {
+                    return this.keyMap[hash][i];
+                } 
+            }
+        }
+        return undefined;
+    }
+}
+
+var hashtable = new HashTable();
+hashtable.set("Pink", "#fc03e8");
+hashtable.set("Cyan", "#03f8fc");
+hashtable.set("Orange", "#fc8c03");
+
+console.log(hashtable.get("Pink"));
+console.log(hashtable.get("Cyan"));
+console.log(hashtable.get("Orange"));
+
+</script>
