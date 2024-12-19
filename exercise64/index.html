@@ -1,7 +1,7 @@
 <script>
 /* Implement the extractMax method of a Binary Heap */
 
-class BinaryHeap {
+class MaxBinaryHeap {
     constructor() {
         this.values = [];
     }
@@ -11,7 +11,7 @@ class BinaryHeap {
         var index = this.values.length - 1;
         var parentIndex = Math.floor((index-1) / 2);
 
-        while(this.values[parentIndex] < this.values[index] && index > 0) {
+        while(index > 0 && this.values[parentIndex] < this.values[index]) {
             var temp = this.values[parentIndex];
             this.values[parentIndex] = this.values[index];
             this.values[index] = temp;
@@ -55,7 +55,7 @@ class BinaryHeap {
     }
 }
 
-var heap = new BinaryHeap();
+var heap = new MaxBinaryHeap();
 heap.insert(30);
 heap.insert(20);
 heap.insert(40);
