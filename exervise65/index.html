@@ -1,0 +1,77 @@
+<script>
+/* Implement a Priority Queue */
+
+class Node {
+    constructor(val, priority) {
+        this.val = val;
+        this.priority = priority;
+    } 
+}
+
+class PriorityQueue {
+    constructor() {
+        this.values = [];
+    }
+
+    enqueue(node) {
+        this.values.push(node);
+        var index = this.values.length - 1;
+        var parentIndex = Math.floor((index-1) / 2);
+
+        while(index > 0 && this.values[parentIndex].priority > this.values[index].priority) {
+            var temp = this.values[parentIndex];
+            this.values[parentIndex] = this.values[index];
+            this.values[index] = temp;
+            index = parentIndex;
+            parentIndex = Math.floor((index-1) / 2);
+        }
+    }
+
+    dequeue() {
+        var oldRoot = this.values[0];
+        var end = this.values.pop();
+        if (this.values.length < 1) return oldRoot;
+        this.values[0] = end;
+        
+        var parentIndex = 0;
+        while(true) {
+            var leftChild = parentIndex * 2 + 1;
+            if (leftChild > this.values.length - 1) break;
+            var rightChild = parentIndex * 2 + 2;
+            var largestIndex;
+            if (rightChild > this.values.length - 1) {
+                largestIndex = leftChild;
+            }
+            else {
+                largestIndex = this.values[leftChild].priority < this.values[rightChild].priority ? leftChild : rightChild;
+            }
+
+            if (this.values[parentIndex].priority > this.values[largestIndex].priority) {
+                var temp = this.values[parentIndex];
+                this.values[parentIndex] = this.values[largestIndex];
+                this.values[largestIndex] = temp;
+                parentIndex = largestIndex;
+            }
+            else {
+                break;
+            }
+        }
+        return oldRoot;
+
+    }
+}
+
+var q = new PriorityQueue();
+q.enqueue(new Node("a", 5));
+q.enqueue(new Node("b", 4));
+q.enqueue(new Node("c", 3));
+q.enqueue(new Node("d", 2));
+q.enqueue(new Node("e", 1));
+q.enqueue(new Node("f", 0));
+q.enqueue(new Node("g", 5));
+
+
+console.log(q.values);
+console.log(q.dequeue());
+console.log(q.values);
+</script>
