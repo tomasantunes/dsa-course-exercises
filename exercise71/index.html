@@ -1,0 +1,46 @@
+<script>
+/* Implement the removeVertex method of a Graph */
+
+class Graph {
+    constructor() {
+        this.adjacencyList = {};
+    }
+
+    addVertex(val) {
+        if (!this.adjacencyList[val]) {
+            this.adjacencyList[val] = [];
+        }
+    }
+
+    addEdge(v1, v2) {
+        this.adjacencyList[v1].push(v2);
+        this.adjacencyList[v2].push(v1);
+    }
+
+    removeEdge(v1, v2) {
+        var idx2 = this.adjacencyList[v1].indexOf(v2);
+        this.adjacencyList[v1].splice(idx2, 1);
+        var idx1 = this.adjacencyList[v2].indexOf(v1);
+        this.adjacencyList[v2].splice(idx1, 1);
+    }
+
+    removeVertex(v) {
+        for (var i in this.adjacencyList[v]) {
+            var v2 = this.adjacencyList[v][i];
+            this.removeEdge(v, v2);
+        }
+        delete this.adjacencyList[v];
+    }
+}
+
+var g = new Graph();
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addEdge("A", "B");
+g.addEdge("B", "C");
+g.removeVertex("A");
+
+console.log(g.adjacencyList);
+
+</script>
