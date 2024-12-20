@@ -1,0 +1,21 @@
+<script>
+/* Implement the structure for a Weighted Graph. */
+
+class WeightedGraph {
+    constructor() {
+        this.adjacencyList = {};
+    }
+
+    addVertex(val) {
+        if (!this.adjacencyList[val]) {
+            this.adjacencyList[val] = [];
+        }
+    }
+
+    addEdge(v1, v2, weight) {
+        this.adjacencyList[v1].push({node: v2, weight});
+        this.adjacencyList[v2].push({node: v1, weight});
+    }
+}
+
+</script>
