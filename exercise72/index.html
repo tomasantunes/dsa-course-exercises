@@ -1,0 +1,76 @@
+<script>
+/* Implement recursive DFS traversal of a Graph */
+
+class Graph {
+    constructor() {
+        this.adjacencyList = {};
+    }
+
+    addVertex(val) {
+        if (!this.adjacencyList[val]) {
+            this.adjacencyList[val] = [];
+        }
+    }
+
+    addEdge(v1, v2) {
+        this.adjacencyList[v1].push(v2);
+        this.adjacencyList[v2].push(v1);
+    }
+
+    removeEdge(v1, v2) {
+        var idx2 = this.adjacencyList[v1].indexOf(v2);
+        this.adjacencyList[v1].splice(idx2, 1);
+        var idx1 = this.adjacencyList[v2].indexOf(v1);
+        this.adjacencyList[v2].splice(idx1, 1);
+    }
+
+    removeVertex(v) {
+        for (var i in this.adjacencyList[v]) {
+            var v2 = this.adjacencyList[v][i];
+            this.removeEdge(v, v2);
+        }
+        delete this.adjacencyList[v];
+    }
+
+    recursiveDFS(vertex) {
+        var result = [];
+        var visited = {};
+        var list = this.adjacencyList;
+
+        function traverse(vertex) {
+            if (list[vertex].length == 0) return;
+            visited[vertex] = true;
+            result.push(vertex);
+            for (var i in list[vertex]) {
+                var neighbour = list[vertex][i];
+                if (!visited[neighbour]) {
+                    traverse(neighbour);
+                }
+            }
+        }
+
+        traverse(vertex);
+        return result;
+    }
+}
+
+var g = new Graph();
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addVertex("D");
+g.addVertex("E");
+g.addVertex("F");
+g.addEdge("A", "B");
+g.addEdge("A", "C");
+g.addEdge("B", "D");
+g.addEdge("C", "E");
+g.addEdge("D", "E");
+g.addEdge("D", "F");
+g.addEdge("E", "F");
+
+
+
+console.log(g.recursiveDFS("A"));
+
+</script>
