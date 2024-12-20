@@ -1,0 +1,30 @@
+<script>
+/* Implement the addEdge method of a Graph */
+
+class Graph {
+    constructor() {
+        this.adjacencyList = {};
+    }
+
+    addVertex(val) {
+        if (!this.adjacencyList[val]) {
+            this.adjacencyList[val] = [];
+        }
+    }
+
+    addEdge(v1, v2) {
+        this.adjacencyList[v1].push(v2);
+        this.adjacencyList[v2].push(v1);
+    }
+}
+
+var g = new Graph();
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addEdge("A", "B");
+g.addEdge("B", "C");
+
+console.log(g.adjacencyList);
+
+</script>
