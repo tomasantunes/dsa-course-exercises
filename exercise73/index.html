@@ -57,17 +57,19 @@ class Graph {
         var s = [];
         var result = [];
         var visited = {};
+        var vertex;
         s.push(start);
+        visited[start] = true;
 
         while(s.length) {
-            var vertex = s.pop();
-            if (!visited[vertex]) {
-                visited[vertex] = true;
-                result.push(vertex);
-                this.adjacencyList[vertex].forEach(function(neighbour) {
+            vertex = s.pop();
+            result.push(vertex);
+            this.adjacencyList[vertex].forEach(function(neighbour) {
+                if (!visited[neighbour]) {
+                    visited[neighbour] = true;
                     s.push(neighbour);
-                });
-            }
+                }
+            });
         }
         return result;
     }
