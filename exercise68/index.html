@@ -7,7 +7,9 @@ class Graph {
     }
 
     addVertex(val) {
-        this.adjacencyList[val] = [];
+        if (!this.adjacencyList[val]) {
+            this.adjacencyList[val] = [];
+        }
     }
 }
 
