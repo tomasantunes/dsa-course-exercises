@@ -1,0 +1,21 @@
+<script>
+/* Implement the addVertex method of a Graph */
+
+class Graph {
+    constructor() {
+        this.adjacencyList = {};
+    }
+
+    addVertex(val) {
+        this.adjacencyList[val] = [];
+    }
+}
+
+var g = new Graph();
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+
+console.log(g.adjacencyList);
+
+</script>
